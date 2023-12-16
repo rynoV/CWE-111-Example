@@ -1,7 +1,7 @@
 exp: src/main/java/Main.c src/main/java/org/example/Main.java
 	@cd src/main/java; javac -h . org/example/Main.java
 	@cd src/main/java;\
-	    gcc -g -fno-stack-protector -I /usr/lib/jvm/java-11-openjdk/include/ -I /usr/lib/jvm/java-11-openjdk/include/linux/\
+	    gcc -g -fno-stack-protector -I /usr/lib/jvm/java-11-openjdk-amd64/include/ -I /usr/lib/jvm/java-11-openjdk-amd64/include/linux/\
 	    Main.c -shared -o libmain.so -fPIC > /dev/null 2>&1
 
 run: exp
