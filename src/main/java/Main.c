@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include "org_example_Main.h"
 
+// This is the implementation of the native writeToAccountingFile declaration from Main.java
 JNIEXPORT void JNICALL Java_org_example_Main_writeToAccountingFile(JNIEnv *env, jobject obj)
 {
     jclass cls = (*env)->GetObjectClass(env, obj);
 
     jfieldID compensationFieldId = (*env)->GetFieldID(env, cls, "compensation", "I");
+    // This is where we start to read from the JNI the HR system name which John managed to change.
     jfieldID nameFieldId = (*env)->GetFieldID(env, cls, "name", "Ljava/lang/String;");
 
     jint jCompensation = (*env)->GetIntField(env, obj, compensationFieldId);
@@ -15,6 +17,8 @@ JNIEXPORT void JNICALL Java_org_example_Main_writeToAccountingFile(JNIEnv *env, 
     jName = (*env)->GetStringUTFChars(env, nameObject, NULL);
 
     FILE *file = fopen("./accounting-compensation.ssv", "a");
+    // John managed to change his name to be 7 characters long, so with strcpy, the last character of John's name will
+    // be written into compensation.
     int compensation = jCompensation;
     char name[6];
     strcpy(name, jName);

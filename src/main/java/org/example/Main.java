@@ -5,12 +5,15 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Main {
+    // This is where the interface of the C function that will be called through JNI is declared
     public native void writeToAccountingFile();
 
     static {
+        // We load the C library "libmain.so"
         System.loadLibrary("main");
     }
 
+    // We use these instance variables to pass data to the C library
     private int compensation;
     private String name;
 
