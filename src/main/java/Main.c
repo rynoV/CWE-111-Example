@@ -17,8 +17,9 @@ JNIEXPORT void JNICALL Java_org_example_Main_writeToAccountingFile(JNIEnv *env, 
     jName = (*env)->GetStringUTFChars(env, nameObject, NULL);
 
     FILE *file = fopen("./accounting-compensation.ssv", "a");
-    // John managed to change his name to be 7 characters long, so with strcpy, the last character of John's name will
-    // be written into compensation.
+    // John managed to change his name to be 7 characters long, so with strcpy,
+    // the last character of John's name will be written into compensation. A
+    // possible solution would be to use strncpy instead of strcpy.
     int compensation = jCompensation;
     char name[6];
     strcpy(name, jName);

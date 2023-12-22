@@ -18,6 +18,7 @@ public class Main {
     private String name;
 
     public static void main(String[] args) {
+        // The program takes the HR data as a CSV file path as an argument
         if (args.length != 1) {
             System.out.println("Usage: cmd <csv-file-path>");
             System.exit(1);
@@ -25,6 +26,7 @@ public class Main {
 
         String csvFilePath = args[0];
 
+        // We read the CSV file line by line
         try (BufferedReader reader = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -34,8 +36,11 @@ public class Main {
                 int number = Integer.parseInt(columns[1].trim());
 
                 Main main = new Main();
+                // Save the data of this CSV line in the instance variables to
+                // pass as input to the C library
                 main.compensation = number;
                 main.name = name;
+                // Call the C library
                 main.writeToAccountingFile();
             }
         } catch (IOException e) {
